@@ -46,6 +46,20 @@
                 <p>Vous ne pouvez plus contribuer pour cette semaine.</p>
             </div>
             @endcan
+
+            <div>
+                <label for="category_id">Catégorie</label>
+                <select name="category_id" id="category_id">
+                    <option value="" selected disabled>Sélectionner une catégorie</option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            @error('category_id')
+            <p class="error-message">{{ $message }}</p>
+            @enderror
         </section>
     </main>
 

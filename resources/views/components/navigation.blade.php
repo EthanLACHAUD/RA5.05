@@ -29,6 +29,9 @@
                 <button type="submit">Se déconnecter</button>
             </form>
         </li>
+        <li @class(['current' => request()->routeIs('app.categories.*')])>
+            <a href="{{ route('app.categories.index') }}">Catégories</a>
+        </li>
     </ul>
     @endauth
 </nav>
