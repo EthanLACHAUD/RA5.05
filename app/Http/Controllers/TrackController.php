@@ -12,14 +12,16 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class TrackController extends Controller
 {
     /**
      * Show given track.
      */
-    public function show(Request $request, Week $week, Track $track, Player $player): View
+    public function show(Week $week, Track $track, Request $request, Player $player): View
     {
+        $track = $track->load('category');
         return view('app.tracks.show', [
             'week' => $week->loadCount('tracks'),
             'track' => $track->loadCount('likes'),
@@ -35,10 +37,11 @@ class TrackController extends Controller
      */
     public function create(UserService $user): View
     {
-        return view('app.tracks.create', [
-            'week' => Week::current(),
-            'remaining_tracks_count' => $user->remainingTracksCount(),
-        ]);
+        $week = Week::current();
+        $categories = Category::all();
+        $remaining_tracks_count = $user->getRemainingTracksCount($week);
+
+        return view('app.tracks.create', compact('week', 'categories', 'remaining_tracks_count'));
     }
 
     /**

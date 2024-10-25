@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Week;
 
 class UserService
 {
@@ -49,5 +50,12 @@ class UserService
 
         // Set new avatar
         return $avatar->store('avatars', ['disk' => 'public']);
+    }
+
+    public function getRemainingTracksCount(Week $week): int
+    {
+        $maxTracksPerWeek = config('app.max_tracks_per_week', 3);
+        $userTracksCount = $this->user->tracks()->where('week_id', $week->id)->count();
+        return max(0, $maxTracksPerWeek - $userTracksCount);
     }
 }

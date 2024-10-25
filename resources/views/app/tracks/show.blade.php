@@ -53,10 +53,14 @@
                         <dd>{{ trans_choice('tracks.likes', $track->likes_count) }}</dd>
                     </dl>
 
-                    <dl>
+                    <dl>    
                         <dt>Catégorie</dt>
                         <dd>
+                            @if($track && $track->category) 
                             <a href="{{ route('app.categories.show', ['category' => $track->category->id]) }}" class="link">{{ $track->category->name }}</a>
+                            @else
+                            Non catégorisé
+                            @endif
                         </dd>
                     </dl>
 
