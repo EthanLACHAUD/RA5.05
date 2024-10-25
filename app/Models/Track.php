@@ -21,6 +21,7 @@ class Track extends Model
         'title',
         'artist',
         'url',
+        'category_id',
     ];
 
     /**
@@ -47,6 +48,14 @@ class Track extends Model
     public function week(): BelongsTo
     {
         return $this->belongsTo(Week::class);
+    }
+
+    /**
+     * Get the track category.
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**
