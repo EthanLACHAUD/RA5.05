@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::withCount('tracks')->get();
-        return view('app.categories.index', compact('categories'));
+        return view('app.categorie.index', compact('categories'));
     }
 
     public function show(Category $category)

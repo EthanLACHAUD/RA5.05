@@ -51,7 +51,7 @@ class Track extends Model
     }
 
     /**
-     * Get the track category.
+     * Get the category that owns the track.
      */
     public function category(): BelongsTo
     {
