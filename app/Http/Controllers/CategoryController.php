@@ -22,7 +22,7 @@ class CategoryController extends Controller
             ->orderByDesc('likes_count')
             ->paginate(15);
 
-        return view('app.categories.show', compact('category', 'tracks'));
+        return view('app.categorie.show', compact('category', 'tracks'));
     }
 
     public function tracks(Category $category)
