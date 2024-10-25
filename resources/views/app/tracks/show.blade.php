@@ -14,6 +14,15 @@
                 <dt>Titre</dt>
                 <dd>{{ $track->title }}</dd>
 
+                <dt>Catégorie</dt>
+                <dd>
+                    @if($track && $track->category) 
+                    <a href="{{ route('app.categories.show', ['category' => $track->category->id]) }}" class="link">{{ $track->category->name }}</a>
+                    @else
+                    Non catégorisé
+                    @endif
+                </dd>
+
                 <dt>Contributeur</dt>
                 <dd class="flex-center">
                     <x-avatar size="medium" :src="$track->user->avatar" /> {{ $track->user->username }}
@@ -51,17 +60,6 @@
                     <dl>
                         <dt>Réactions</dt>
                         <dd>{{ trans_choice('tracks.likes', $track->likes_count) }}</dd>
-                    </dl>
-
-                    <dl>    
-                        <dt>Catégorie</dt>
-                        <dd>
-                            @if($track && $track->category) 
-                            <a href="{{ route('app.categories.show', ['category' => $track->category->id]) }}" class="link">{{ $track->category->name }}</a>
-                            @else
-                            Non catégorisé
-                            @endif
-                        </dd>
                     </dl>
 
                     <form action="{{ route('app.tracks.like', ['week' => $week->uri, 'track' => $track]) }}" method="post">
